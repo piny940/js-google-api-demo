@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "dotenv": "^16.4.5"
+  },
+  "dependencies": {
+    "googleapis": "^134.0.0"
   }
 }
