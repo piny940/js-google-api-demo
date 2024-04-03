@@ -23,6 +23,8 @@ const readSheet = async (range) => {
 const updateSheet = async (range, values) => {
   const auth = getAuth()
   const client = google.sheets({ auth, version: "v4" })
+
+  checkRange(range)
   await client.spreadsheets.values.update({
     spreadsheetId: process.env.SPREADSHEET_ID,
     range,
