@@ -17,10 +17,24 @@ const readSheet = async (range) => {
     range,
   })
   const json = response.data
-  console.log(json)
   return json.values
+}
+
+const updateSheet = async (range, values) => {
+  const auth = getAuth()
+  const client = google.sheets({ auth, version: "v4" })
+  await client.spreadsheets.values.update({
+    spreadsheetId: process.env.SPREADSHEET_ID,
+    range,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      range,
+      values
+    }
+  })
 }
 
 module.exports = {
   readSheet,
+  updateSheet,
 }
