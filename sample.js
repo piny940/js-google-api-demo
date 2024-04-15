@@ -10,20 +10,22 @@ const updateStatus = (status) => {
 
 const main = async () => {
   await auth.setup()
+  
+  updateStatus("文章生成中...")
+  console.log("文章生成中")
+
   const message =
     'Output ten Japanese sentences. The format is {"sentences": ["sentence1", "sentence2", ...]}'
   const res = await openai.chat(message)
   const resJson = JSON.parse(res)
   const sentences = resJson.sentences
 
-  updateStatus("文章生成中...")
-
   for (let i = 0; i < sentences.length; i++) {
     const sentence = sentences[i]
     await sheet.updateSheet(`A${i + 8}`, [[sentence]])
 
     await new Promise((resolve) => {
-      setTimeout(resolve, 100)
+      setTimeout(resolve, 1000)
     })
   }
 
@@ -36,7 +38,7 @@ const main = async () => {
     await sheet.updateSheet(`B${i + 8}`, [[sentence]])
 
     await new Promise((resolve) => {
-      setTimeout(resolve, 100)
+      setTimeout(resolve, 1000)
     })
   }
 
