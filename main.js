@@ -4,43 +4,16 @@ const sheet = require("./google/sheet.js")
 const openai = require("./api/openai.js")
 const deepl = require("./api/deepl.js")
 
-const updateStatus = (status) => {
-  sheet.updateSheet("E4", [[status]])
-}
-
 const main = async () => {
   await auth.setup()
-  const message =
-    'Output ten Japanese sentences. The format is {"sentences": ["sentence1", "sentence2", ...]}'
-  const res = await openai.chat(message)
-  const resJson = JSON.parse(res)
-  const sentences = resJson.sentences
 
-  updateStatus("文章生成中...")
+  // 演習1. スプシを読み込む
+  // A1:B3のセルを読み込んでみましょう
+  // 例↓
+  // let cells = await sheet.readSheet("A1:B2") ← A1:B2のセルを読み込む
+  // console.log(cells) ← 読み込んだ内容を表示する
 
-  for (let i = 0; i < sentences.length; i++) {
-    const sentence = sentences[i]
-    await sheet.updateSheet(`A${i + 1}`, [[sentence]])
-
-    await new Promise((resolve) => {
-      setTimeout(resolve, 500)
-    })
-  }
-
-  updateStatus("翻訳中...")
-
-  const translated = await deepl.translate(sentences, "EN")
-
-  for (let i = 0; i < translated.length; i++) {
-    const sentence = translated[i]
-    await sheet.updateSheet(`B${i + 1}`, [[sentence]])
-
-    await new Promise((resolve) => {
-      setTimeout(resolve, 500)
-    })
-  }
-
-  updateStatus("完了")
+  // ここを編集する
 }
 
 main()
