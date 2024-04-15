@@ -20,7 +20,7 @@ const main = async () => {
 
   for (let i = 0; i < sentences.length; i++) {
     const sentence = sentences[i]
-    await sheet.updateSheet(`A${i + 1}`, [[sentence]])
+    await sheet.updateSheet(`A${i + 8}`, [[sentence]])
 
     await new Promise((resolve) => {
       setTimeout(resolve, 100)
@@ -33,7 +33,7 @@ const main = async () => {
 
   for (let i = 0; i < translated.length; i++) {
     const sentence = translated[i]
-    await sheet.updateSheet(`B${i + 1}`, [[sentence]])
+    await sheet.updateSheet(`B${i + 8}`, [[sentence]])
 
     await new Promise((resolve) => {
       setTimeout(resolve, 100)
