@@ -14,6 +14,61 @@ const main = async () => {
   // console.log(cells) ← 読み込んだ内容を表示する
 
   // ここを編集する
+  let cells = await sheet.readSheet("A1:B3")
+  console.log(cells)
+
+  // 演習2. スプシを編集する
+  // D1:E3のセルに[["私は", "xxxです"], ["学部は", "xxxです"], ["趣味は", "xxxです"]]と書き込んでみましょう
+  // 例↓
+  // await sheet.updateSheet("A4:B6", [
+  //   ["私は", "mikanです"],
+  //   ["学部は", "工学部です"],
+  //   ["趣味は", "プログラミングです"],
+  // ])
+
+  // ここを編集する
+  await sheet.updateSheet("D1:E3", [
+    ["私は", "xxxです"],
+    ["学部は", "xxxです"],
+    ["趣味は", "xxxです"],
+  ])
+
+  // 演習3. 変数を使ってスプシを編集する
+  // 変数に値を代入して、その変数を使ってスプシを編集してみましょう
+  // 例↓
+  // let message = "こんにちは"
+  // await sheet.updateSheet("A6", [[message]])
+
+  // ここを編集する
+  let message = "こんばんは"
+  await sheet.updateSheet("A1", [[message]])
+
+  // 演習4. ChatGPTを使ってみよう
+  // ChatGPTを使ってみましょう
+  // 例↓
+  // let result = await openai.chat("教授に送るメールの文章を考えてください。")
+  // console.log(result)
+
+  // ここを編集する
+  let result4 = await openai.chat("日本語の文を考えてください。")
+  console.log(result4)
+
+  // 演習5. ChatGPTで英語の文章を作成してスプシのF1のセルに書き込んでみましょう
+  // 例↓
+  // let result5 = await openai.chat("日本語の文章を考えてください。")
+  // await sheet.updateSheet("A8", [[result5]])
+
+  // ここを編集する
+  let result5 = await openai.chat("英語の文章を考えてください。")
+  await sheet.updateSheet("F1", [[result5]])
+
+  // 演習5. DeepLを使ってみよう
+  // DeepLを使って英訳してみましょう
+  // 例↓
+  // let result5 = await deepl.translate("こんにちは", "EN")
+  // console.log(result5)
+
+  // ここを編集する
 }
 
 main()
